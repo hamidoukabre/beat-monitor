@@ -3,7 +3,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-Backend-brightgreen.svg)](https://fastapi.tiangolo.com/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)](https://www.tensorflow.org)
 
-# Beat Monitor – Neural Audio Fingerprinting (Version adaptée)
+# Beat Monitor – Neural Audio Fingerprinting (Adapté)
 
 ## À propos du projet
 
@@ -11,7 +11,7 @@
 Comment garantir une **rémunération équitable des artistes** quand la surveillance manuelle des diffusions est impossible à l'échelle nationale ?
 
 ### Notre réponse
-**Beat Monitor**, développé avec **DataLab**, déploie l'IA au service de la propriété intellectuelle. Le système **NeuralFP** identifie automatiquement chaque œuvre diffusée, qu'elle passe sur une radio en ligne ou une télévision.
+**Beat Monitor** déploie l'IA au service de la propriété intellectuelle. Le système **NeuralFP** identifie automatiquement chaque œuvre diffusée, qu'elle passe sur une radio en ligne ou une télévision.
 
 ### Le gain
 ✅ **Zéro déclaration manuelle**  
