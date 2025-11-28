@@ -1,0 +1,99 @@
+# ------------------------------
+# Dataset directories 
+# ------------------------------
+DIR:
+    SOURCE_ROOT_DIR : '../data/music_clean/'
+    BG_ROOT_DIR     : '../data/aug/bg/'
+    IR_ROOT_DIR     : '../data/aug/ir/'
+    OUTPUT_ROOT_DIR : './logs/emb/'
+    LOG_ROOT_DIR    : './logs/'
+
+# ------------------------------
+# Dataset selection
+# ------------------------------
+DATA_SEL:
+    TRAIN          : 'train'
+    TEST_QUERY_DB  : 'test'
+
+# ------------------------------
+# Model configuration
+# ------------------------------
+MODEL:
+    FEAT      : 'melspec'
+    FS        : 8000
+    DUR       : 1.0
+    HOP       : 0.5
+    STFT_WIN  : 1024
+    STFT_HOP  : 256
+    F_MIN     : 300
+    F_MAX     : 4000
+    N_MELS    : 256
+    EMB_SZ    : 128
+    BN        : 'layer_norm2d'
+
+# ------------------------------
+# Batch sizes
+# ------------------------------
+BSZ:
+    TR_BATCH_SZ   : 120
+    TR_N_ANCHOR   : 60
+    VAL_BATCH_SZ  : 120
+    VAL_N_ANCHOR  : 60
+    TS_BATCH_SZ   : 125
+
+# ------------------------------
+# Training parameters
+# ------------------------------
+TRAIN:
+    MAX_EPOCH          : 100
+    OPTIMIZER          : 'Adam'
+    LR                 : 1e-4
+    LR_SCHEDULE        : 'cos'
+    TENSORBOARD        : True
+    SAVE_IMG           : True
+    MINI_TEST_IN_TRAIN : True
+
+# ------------------------------
+# Loss configuration
+# ------------------------------
+LOSS:
+    LOSS_MODE : 'NTxent'
+    TAU       : 0.05
+
+# ------------------------------
+# Time-domain augmentation 
+# ------------------------------
+TD_AUG:
+    TR_SNR       : [0, 10]
+    VAL_SNR      : [0, 10]
+    TS_SNR       : [0, 10]
+
+    # Used
+    TR_BG_AUG    : True
+    VAL_BG_AUG   : True
+    TS_BG_AUG    : True
+
+    TR_IR_AUG    : True
+    VAL_IR_AUG   : True
+    TS_IR_AUG    : True
+
+    # Not used
+    TR_SPEECH_AUG : False
+    VAL_SPEECH_AUG: False
+    TS_SPEECH_AUG : False
+
+# ------------------------------
+# SpecAug
+# ------------------------------
+SPEC_AUG:
+    SPECAUG_CHAIN : ['cutout', 'horizontal']
+    SPECAUG_PROBS : 1.0
+    SPECAUG_N_HOLES: 1
+    SPECAUG_HOLE_FILL: 'zeros'
+
+# ------------------------------
+# Device setup
+# ------------------------------
+DEVICE:
+    CPU_N_WORKERS : 4
+    CPU_MAX_QUEUE : 10

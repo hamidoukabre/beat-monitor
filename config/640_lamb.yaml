@@ -1,0 +1,92 @@
+
+DIR:
+    SOURCE_ROOT_DIR : '/data/dataset/music_clean/'        # Données audio propres (version nettoyée)
+    BG_ROOT_DIR     : '/data/dataset/aug/bg/'             # Bruit de fond (background noise)
+    IR_ROOT_DIR     : '/data/dataset/aug/ir/'             # Impulse responses (réverbérations)
+    OUTPUT_ROOT_DIR : './logs/emb/'                       # Fingerprints générés
+    LOG_ROOT_DIR    : './logs/'                           # Checkpoints & logs
+
+
+# ------------------------------
+# Données utilisées
+# ------------------------------
+DATA_SEL:
+    TRAIN        : 'train'      
+    TEST_QUERY_DB  : 'test'       
+
+
+# ------------------------------
+# Modèle NeuralFP
+# ------------------------------
+MODEL:
+    FEAT   : 'melspec'
+    FS     : 8000
+    DUR    : 1.0
+    HOP    : 0.5
+    STFT_WIN : 1024
+    STFT_HOP : 256
+    F_MIN  : 300
+    F_MAX  : 4000
+    N_MELS : 256
+    EMB_SZ : 128
+    BN     : 'layer_norm2d'
+
+
+# ------------------------------
+# Training
+# ------------------------------
+BSZ:
+    TR_BATCH_SZ : 640
+    TR_N_ANCHOR : 320
+    VAL_BATCH_SZ: 120
+    VAL_N_ANCHOR: 60
+    TS_BATCH_SZ : 125
+
+TRAIN:
+    MAX_EPOCH : 100
+    OPTIMIZER : 'LAMB'
+    LR        : 1e-4
+    LR_SCHEDULE: 'cos'
+    TENSORBOARD: True
+    SAVE_IMG   : True
+
+# ------------------------------
+# Loss
+# ------------------------------
+LOSS:
+    LOSS_MODE : 'NTxent'
+    TAU       : 0.05
+
+
+# ------------------------------
+# Augmentations réellement utilisée
+# ------------------------------
+TD_AUG:
+    TR_SNR : [0, 10]
+    VAL_SNR: [0, 10]
+    TS_SNR : [0, 10]
+
+    TR_BG_AUG : True   # ✔ utilisé
+    VAL_BG_AUG: True   # ✔ utilisé
+    TS_BG_AUG : True   # ✔ utilisé
+
+    TR_IR_AUG : True   # ✔ utilisé
+    VAL_IR_AUG: True   # ✔ utilisé
+    TS_IR_AUG : True   # ✔ utilisé
+
+
+# ------------------------------
+# SpecAug (léger et utile)
+# ------------------------------
+SPEC_AUG:
+    SPECAUG_CHAIN : ['cutout', 'horizontal']
+    SPECAUG_PROBS : 1.
+    SPECAUG_N_HOLES: 1
+    SPECAUG_HOLE_FILL: 'zeros'
+
+# ------------------------------
+# Device
+# ------------------------------
+DEVICE:
+    CPU_N_WORKERS : 8
+    CPU_MAX_QUEUE : 20
